@@ -1,0 +1,87 @@
+Contribute
+==========
+
+Creating Issues
+---------------
+
+Run `terminus cli version` to confirm you are [running the latest version](https://github.com/pantheon-systems/terminus/releases) before opening a new issue.
+
+Setting Up
+----------
+
+1. Clone this Git repository on your local machine.
+2. Install [Composer](https://getcomposer.org/) if you don't already have it.
+3. Run `composer install` to fetch all the dependencies.
+4. Run `./bin/terminus help` to test that everything was installed properly.
+
+Submitting Patches
+------------------
+
+Whether you want to fix a bug or implement a new feature, the process is pretty much the same:
+
+0. [Search existing issues](https://github.com/pantheon-systems/terminus/issues); if you can't find anything related to what you want to work on, open a new issue so that you can get some initial feedback.
+1. [Fork](https://github.com/pantheon-systems/terminus/fork) the repository.
+2. Push the code changes from your local clone to your fork.
+3. Open a pull request.
+
+It doesn't matter if the code isn't perfect. The idea is to get it reviewed early and iterate on it.
+
+If you're adding a new feature, please add one or more functional tests for it in the `tests/features/` directory. See below.
+
+Lastly, please follow the [WordPress Coding Standards](http://make.wordpress.org/core/handbook/coding-standards/).
+
+Running and Writing Tests
+-------------------------
+
+There are two types of automated tests:
+
+* unit tests, implemented using [PHPUnit](http://phpunit.de/)
+* functional tests, implemented using [Behat](http://behat.org)
+
+Both the unit and functional tests can be run together via:
+
+`./scripts/test.sh`
+
+### Unit Tests
+
+The unit test files are in the `tests/unit-tests` directory.
+
+To run the unit tests, simply execute:
+
+  `vendor/bin/phpunit`
+
+### Functional Tests
+
+The functional test files are in the `test/features` directory. To run the entire test suite:
+
+  `vendor/bin/behat -c=tests/config/behat.yml`
+
+Or to test a single feature:
+
+  `vendor/bin/behat -c=tests/config/behat.yml tests/features/core.feature`
+
+More information can be found by running `vendor/bin/behat --help`.
+
+Versioning
+----------
+
+### Versions
+
+In keeping with the standards of semantic versioning, backward-incompatible fixes are targeted to "major" versions. "Minor" versions are reserved for significant feature/bug releases needed between major versions. "Patch" releases are reserved only for critical security issues and other bugs critical to stabilizing the release.
+
+After a new major version is released, previous major versions are actively supported for one year.
+
+#### What qualifies as a backward-incompatible change?
+
+Our initial commitment will be to command compatibility and parameter compatibility. However, since on the command line STDOUT and STDERR are essentially APIs we will make a best effort to keep machine-readable output compatibility, meaning if your code interfaces with Terminus via --format=json or --format=bash formatting, we will try our best to ensure these are stable and compatible between minor release. However, changes to the STDOUT, like success and fail messages, should not be assumed to be compatible.
+
+### Release Stability
+
+If you are using Terminus in a production environment, you should be deploying the executable for [the latest release](https://github.com/pantheon-systems/terminus/releases).
+
+Ongoing development on the next planned release will be on the master branch and should not be considered stable, as changes will be taking place on a daily basis.
+
+Feedback
+--------
+
+Writing for Terminus should be fun. If you find any of this hard to figure out, let us know so we can improve our process or documentation!
